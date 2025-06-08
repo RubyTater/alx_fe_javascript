@@ -37,4 +37,21 @@ header, footer {
   text-align: center;
   flex-shrink: 0; /* prevent shrinking */
 }
+body {
+  background-color: #f0f8ff;
+  color: #333;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-right: 1em;
+}
+
+article {
+  background-color: #fff;
+  padding: 1em;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
 
