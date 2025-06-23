@@ -29,7 +29,7 @@ function showRandomQuote() {
 }
 
 // Add a new quote
-function addQuote() {
+function createAddQuoteForm() {
   const textInput = document.getElementById("newQuoteText");
   const categoryInput = document.getElementById("newQuoteCategory");
   const text = textInput.value.trim();
