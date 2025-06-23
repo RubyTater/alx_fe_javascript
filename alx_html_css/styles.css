@@ -1,0 +1,57 @@
+/* Make <body> a flex container with vertical layout */
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* full viewport height */
+  margin: 0; /* remove default margin */
+}
+
+/* Make <main> a flex container with horizontal layout */
+main {
+  display: flex;
+  flex-direction: row;
+  flex: auto; /* automatic width and height */
+  height: auto;
+  width: auto;
+  flex-grow: 1; /* fill available space between header/footer */
+}
+
+/* <article> takes 2 parts of space */
+article {
+  flex: 2;
+  overflow-y: auto; /* vertical scroll if needed */
+  padding: 1rem; /* optional spacing */
+}
+
+/* <aside> takes 1 part of space */
+aside {
+  flex: 1;
+  overflow-y: auto; /* vertical scroll if needed */
+  padding: 1rem; /* optional spacing */
+}
+
+/* Optional: make header and footer visible and styled */
+header, footer {
+  padding: 1rem;
+  background-color: #eee;
+  text-align: center;
+  flex-shrink: 0; /* prevent shrinking */
+}
+body {
+  background-color: #f0f8ff;
+  color: #333;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-right: 1em;
+}
+
+article {
+  background-color: #fff;
+  padding: 1em;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
