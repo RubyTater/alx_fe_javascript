@@ -18,7 +18,7 @@ const quotes = [
   }
   
   // Function to add a new quote
-  function addQuote() {
+  function createAddQuoteForm() {
     const quoteText = document.getElementById("newQuoteText").value.trim();
     const quoteCategory = document.getElementById("newQuoteCategory").value.trim();
   
