@@ -33,6 +33,25 @@ const quotes = [
   
     alert("New quote added!");
   }
+
+  // Populate category dropdown
+function createElement() {
+  const categories = Array.from(new Set(quotes.map(q => q.category)));
+  categoryFilter.innerHTML = '<option value="all">All Categories</option>';
+
+  categories.forEach(cat => {
+    const option = document.createElement("option");
+    option.value = cat;
+    option.textContent = cat;
+    categoryFilter.appendChild(option);
+  });
+
+  // Re-select the last selected category
+  const savedCategory = localStorage.getItem("selectedCategory");
+  if (savedCategory && categories.includes(savedCategory)) {
+    categoryFilter.value = savedCategory;
+  }
+}
   
   // Event listeners
   document.addEventListener("DOMContentLoaded", () => {
