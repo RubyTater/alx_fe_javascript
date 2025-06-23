@@ -70,3 +70,8 @@ function createElement() {
     };
     fileReader.readAsText(event.target.files[0]);
   }
+
+  function saveQuotes() {
+    localStorage.setItem("selectedCategory", categoryFilter.value);
+    showRandomQuote();
+  }
