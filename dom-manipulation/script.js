@@ -58,8 +58,13 @@ function createElement() {
     document.getElementById("newQuote").addEventListener("click", showRandomQuote);
     document.getElementById("addQuoteBtn").addEventListener("click", addQuote);
   });
-  
-  // upload a JSON file
+
+  function saveQuotes() {
+    localStorage.setItem("selectedCategory", categoryFilter.value);
+    showRandomQuote();
+  }
+
+  // import quotes from JSON file
   function importFromJsonFile(event) {
     const fileReader = new FileReader();
     fileReader.onload = function(event) {
@@ -71,7 +76,15 @@ function createElement() {
     fileReader.readAsText(event.target.files[0]);
   }
 
-  function saveQuotes() {
-    localStorage.setItem("selectedCategory", categoryFilter.value);
-    showRandomQuote();
-  }
+  // Export quotes to JSON
+function exportQuotes() {
+  const dataStr = JSON.stringify(quotes, null, 2);
+  const blob = new Blob([dataStr], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "quotes.json";
+  a.click();
+  URL.revokeObjectURL(url);
+}
