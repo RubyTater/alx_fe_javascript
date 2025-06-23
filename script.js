@@ -47,7 +47,7 @@ function createAddQuoteForm() {
 }
 
 // Populate category dropdown
-function populateCategories() {
+function createElement() {
   const categories = Array.from(new Set(quotes.map(q => q.category)));
   categoryFilter.innerHTML = '<option value="all">All Categories</option>';
 
