@@ -120,11 +120,11 @@ function filterQuotes() {
 }
 
 const serverUrl = 'https://jsonplaceholder.typicode.com/posts/1';
-fetchFromServer();
-setInterval(fetchFromServer, 60000);
+fetchQuotesFromServer();
+setInterval(fetchQuotesFromServer, 60000);
 
 
-async function fetchFromServer() { 
+async function fetchQuotesFromServer() { 
   try {
     const res = await fetch(serverUrl);
     const serverData = await res.json(); // assume serverData.quotes is an array
