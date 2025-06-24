@@ -88,3 +88,33 @@ function exportQuotes() {
   a.click();
   URL.revokeObjectURL(url);
 }
+
+
+function populateCategories() {
+  const categoryFilter = document.getElementById("categoryFilter");
+
+  // Get unique categories from quotes
+  const categories = [...new Set(quotes.map(q => q.category))];
+
+  // Reset dropdown
+  categoryFilter.innerHTML = '<option value="all">All Categories</option>';
+
+  categories.forEach(cat => {
+    const option = document.createElement("option");
+    option.value = cat;
+    option.textContent = cat;
+    categoryFilter.appendChild(option);
+  });
+
+  // Restore last selected category if it exists
+  const savedCategory = localStorage.getItem("selectedCategory");
+  if (savedCategory && categories.includes(savedCategory)) {
+    categoryFilter.value = savedCategory;
+  }
+}
+
+function filterQuotes() {
+  const selected = document.getElementById("categoryFilter").value;
+  localStorage.setItem("selectedCategory", selected); // Save selected category
+  showRandomQuote(); // Display filtered quote
+}
