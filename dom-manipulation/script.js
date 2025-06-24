@@ -149,12 +149,12 @@ async function fetchQuotesFromServer() {
     const res = await fetch(serverUrl);
     const serverData = await res.json(); // assume serverData.quotes is an array
 
-    mergeServerData(serverData.quotes);
+    syncQuotes(serverData.quotes);
   } catch {
     console.warn('Server fetch failed');
   }
  }
-function mergeServerData(serverQuotes) { 
+function syncQuotes(serverQuotes) { 
   let changed = false;
 
   serverQuotes.forEach(sq => {
