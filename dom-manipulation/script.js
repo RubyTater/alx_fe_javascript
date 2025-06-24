@@ -26,10 +26,14 @@ const quotes = [
       alert("Please enter both a quote and a category.");
       return;
     }
+
+    const newQuote = { text: quoteText, category: quoteCategory };
   
-    quotes.push({ text: quoteText, category: quoteCategory });
+    quotes.push(newQuote);
     document.getElementById("newQuoteText").value = "";
     document.getElementById("newQuoteCategory").value = "";
+
+    postQuoteToServer(newQuote);
   
     alert("New quote added!");
   }
@@ -123,6 +127,22 @@ const serverUrl = 'https://jsonplaceholder.typicode.com/posts/1';
 fetchQuotesFromServer();
 setInterval(fetchQuotesFromServer, 60000);
 
+async function postQuoteToServer(quote) {
+  try {
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(quote)
+    });
+
+    const result = await response.json();
+    console.log("Posted to server:", result);
+  } catch (error) {
+    console.error("Failed to post quote:", error);
+  }
+}
 
 async function fetchQuotesFromServer() { 
   try {
