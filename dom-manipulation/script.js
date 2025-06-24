@@ -56,7 +56,7 @@ function createElement() {
   // Event listeners
   document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("newQuote").addEventListener("click", showRandomQuote);
-    document.getElementById("addQuoteBtn").addEventListener("click", addQuote);
+    document.getElementById("addQuoteBtn").addEventListener("click", createAddQuoteForm);
   });
 
   function saveQuotes() {
@@ -118,3 +118,45 @@ function filterQuotes() {
   localStorage.setItem("selectedCategory", selected); // Save selected category
   showRandomQuote(); // Display filtered quote
 }
+
+const serverUrl = 'https://jsonplaceholder.typicode.com/posts/1';
+fetchFromServer();
+setInterval(fetchFromServer, 60000);
+
+
+async function fetchFromServer() { 
+  try {
+    const res = await fetch(serverUrl);
+    const serverData = await res.json(); // assume serverData.quotes is an array
+
+    mergeServerData(serverData.quotes);
+  } catch {
+    console.warn('Server fetch failed');
+  }
+ }
+function mergeServerData(serverQuotes) { 
+  let changed = false;
+
+  serverQuotes.forEach(sq => {
+    const idx = quotes.findIndex(lq => lq.text === sq.text);
+    if (idx === -1) {
+      quotes.push(sq);
+      changed = true;
+    } else if (JSON.stringify(quotes[idx]) !== JSON.stringify(sq)) {
+      quotes[idx] = sq; // server wins
+      changed = true;
+    }
+  });
+
+  if (changed) {
+    saveQuotes();
+    populateCategories();
+    showRandomQuote();
+    displayNotification("Quotes updated from server");
+  }
+ }
+function displayNotification(msg) { 
+  const container = document.getElementById("notifications");
+  container.textContent = msg;
+  setTimeout(() => { container.textContent = ""; }, 5000);
+ }
