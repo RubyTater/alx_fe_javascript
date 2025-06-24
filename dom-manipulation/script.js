@@ -172,7 +172,7 @@ function syncQuotes(serverQuotes) {
     saveQuotes();
     populateCategories();
     showRandomQuote();
-    displayNotification("Quotes updated from server");
+    displayNotification("Quotes synced with server!");
   }
  }
 function displayNotification(msg) { 
